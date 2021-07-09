@@ -1,0 +1,33 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  width: auto;
+}
+.panel-one {
+  padding-top: 50px;
+  height: 90vh;
+  width: 30%;
+  border: 1px solid grey;
+}
+button {
+  height: 40px;
+  width: 100px;
+}
+.panel-two {
+  padding-top: 50px;
+  height: 90vh;
+  width: 120%;
+  left: 50%;
+  border: 1px solid grey;
+}
+.vl {
+  border-left: 3px solid black;
+  height: 90vh;
+  left: 50%;
+}
