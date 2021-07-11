@@ -10,22 +10,31 @@ import { SimpleModalModule } from "ngx-simple-modal";
 import { DialogComponent } from "./dialog.component";
 import { FormsModule } from "@angular/forms";
 import { NodesContainerComponent } from "./nodes-container.component";
+import { MappingHomeComponent } from './mapping/mapping-home/mapping-home.component';
+import { MappingNodeComponent } from './mapping/mapping-node/mapping-node.component';
+import { DynamicNodeComponent } from "./mapping/mapping-dynamic-node.component";
+import { MappingNodeService } from "./mapping/mapping-node.service";
+import { Routes } from "@angular/router";
 
 @NgModule({
+  
   declarations: [
     AppComponent,
     NodeComponent,
     DialogComponent,
     NodesContainerComponent,
+    MappingHomeComponent,
+    MappingNodeComponent,
+    DynamicNodeComponent
   ],
-  entryComponents: [DialogComponent, NodeComponent],
+  entryComponents: [DialogComponent, NodeComponent,DynamicNodeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     SimpleModalModule.forRoot({ container: "modal-container" }),
   ],
-  providers: [NodeService],
+  providers: [NodeService,MappingNodeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
