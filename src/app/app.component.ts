@@ -1,6 +1,7 @@
 import { Component, AfterContentInit, OnInit, ViewChild } from "@angular/core";
 import { NodeService } from "./node.service";
 import * as $ from "jquery";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
 
   connections = [];
 
-  constructor(private nodeService: NodeService) {}
+  constructor(private nodeService: NodeService,private router: Router) {}
 
   ngOnInit() {
     this.fillFromJson();
@@ -35,5 +36,8 @@ export class AppComponent implements OnInit {
 
     //this.nodes = data.nodes;
     //this.connections = data.connections;
+  }
+  goToProfileMapping(){
+    this.router.navigate(['/mapping']);
   }
 }
