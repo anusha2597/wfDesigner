@@ -1,0 +1,203 @@
+{
+    "activity": [
+      {
+          "type": "ReadLine",
+          "displayName": "Read Line",
+          "description": "Read text from standard in.",
+          "category": "Console",
+          "icon": "fas fa-terminal",        
+          "properties": [
+            {
+              "name": "variableName",
+              "type": "text",
+              "label": "Variable Name",
+              "hint": "The name of the variable to store the value into.",
+              "options": {}
+            },
+            {
+              "name": "name",
+              "type": "text",
+              "label": "Name",
+              "hint": "Optionally provide a name for this activity. You can reference named activities from expressions.",
+              "options": {}
+            },
+            {
+              "name": "title",
+              "type": "text",
+              "label": "Title",
+              "hint": "Optionally provide a custom title for this activity.",
+              "options": {}
+            },
+            {
+              "name": "description",
+              "type": "text",
+              "label": "Description",
+              "hint": "Optionally provide a custom description for this activity.",
+              "options": {}
+            }
+          ]
+        },
+        {
+            "type": "SendHttpRequest",
+            "displayName": "HTTP Request",
+            "description": "Send an HTTP request.",
+            "category": "HTTP",
+            "properties": [
+              {
+                "name": "url",
+                "type": "text",
+                "label": "Url",
+                "hint": "The URL to send the HTTP request to.",
+                "options": {}
+              },
+              {
+                "name": "method",
+                "type": "select",
+                "label": "Method",
+                "hint": "The HTTP method to use when making the request.",
+                "options": {
+                  
+                }
+              },
+              {
+                "name": "content",
+                "type": "text",
+                "label": "Content",
+                "hint": "The HTTP content to send along with the request.",
+                "options": {
+                 
+                }
+              },
+              {
+                "name": "contentType",
+                "type": "select",
+                "label": "Content Type",
+                "hint": "The content type to send with the request (if applicable).",
+                "options": {
+                  
+                }
+              }]},
+              {
+                "type": "Salesforce",
+                "displayName": "Salesforce",
+                "description": "Salesforce Integration",
+                "category": "Application",
+                "properties": [
+                  {
+                    "name": "url",
+                    "type": "text",
+                    "label": "Url",
+                    "hint": "The URL",
+                    "options": {}
+                  },
+                  {
+                    "name": "connectorAction",
+                    "type": "text",
+                    "label": "Connector Action",
+                    "hint": "Select the action",
+                    "options": {
+                    
+                    }
+                  },
+                  {
+                    "name": "object",
+                    "type": "text",
+                    "label": "Object",
+                    "hint": "Object",
+                    "options": {
+                      "multiline": true
+                    }
+                  },
+                  {
+                    "name": "responseProfile",
+                    "type": "text",
+                    "label": "Response Profile",
+                    "hint": "Response Profile",
+                    "options":{}
+                  }]
+                },
+                {
+                  "type": "Database",
+                  "displayName": "Database",
+                  "description": "Database Integration",
+                  "category": "Database",
+                  "properties": [
+                    {
+                      "name": "databaseType",
+                      "type": "text",
+                      "label": "Database Type",
+                      "hint": "Database Type",
+                      "options": {}
+                    },
+                    {
+                      "name": "connectionString",
+                      "type": "text",
+                      "label": "Connection String",
+                      "hint": "Enter the connection string",
+                      "options": {
+                        
+                      }
+                    },
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object",
+                      "hint": "Object",
+                      "options": {
+                       
+                      }
+                    },
+                    {
+                      "name": "responseProfile",
+                      "type": "text",
+                      "label": "Response Profile",
+                      "hint": "Response Profile",
+                      "options":{}
+                    }]
+                  },
+                  {
+                    "type": "ProgramCommand",
+                    "displayName": "Program Command",
+                    "description": "Program command Integration",
+                    "category": "Console",
+                    "properties": [
+                      {
+                        "name": "command",
+                        "type": "text",
+                        "label": "Command",
+                        "hint": "Command to execute",
+                        "options": {}
+                      }
+                      ]
+                    },
+                    {
+                      "type": "SFTP",
+                      "displayName": "SFTP",
+                      "description": "SFTP Integration",
+                      "category": "",
+                      "properties": [
+                        {
+                          "name": "sftpAction",
+                          "type": "text",
+                          "label": "SFTP Action",
+                          "hint": "Enter the action",
+                          "options": {}
+                        },
+                        {
+                          "name": "remoteDirectory",
+                          "type": "text",
+                          "label": "Remote Directory",
+                          "hint": "Remote Directory Location",
+                          "options": {}
+                        },
+                        {
+                          "name": "moveToDirectory",
+                          "type": "text",
+                          "label": "Move to Directory",
+                          "hint": "Target Directory Location",
+                          "options": {}
+                        }
+                        ]
+                      }
+    ]
+}

@@ -1,7 +1,10 @@
 import { Component, Input, AfterViewInit } from "@angular/core";
 import { jsPlumb } from "jsplumb";
 import { SimpleModalService } from "ngx-simple-modal";
-import { DialogComponent } from "./dialog.component";
+import { ActivityDialogComponent } from "./activity-dialog/activity-dialog.component";
+import { AppService } from "./app.service";
+import { Activity } from "./models/activity";
+import { ActivityPropertyDescriptor } from "./models/activity-property-descriptor";
 
 export interface Node {
   id: string;
@@ -46,7 +49,7 @@ export interface Node {
   ],
 })
 export class NodeComponent implements AfterViewInit {
-  @Input() node: Node;
+  @Input() node: Activity;
 
   @Input() jsPlumbInstance;
   connectorFill = "#999999";
@@ -89,7 +92,10 @@ export class NodeComponent implements AfterViewInit {
     //dropOptions: this.exampleDropOptions,
     DragOptions: {},
   };
-  constructor(private simpleModalService: SimpleModalService) {}
+  constructor(
+    private simpleModalService: SimpleModalService,
+    private appService: AppService
+  ) {}
 
   ngAfterViewInit() {
     const exampleDropOptions = {
@@ -102,14 +108,14 @@ export class NodeComponent implements AfterViewInit {
     if (this.node.type !== "end") {
       this.jsPlumbInstance.addEndpoint(
         id,
-        { anchor: "Continuous", uuid: id + "_bottom" },
+        { anchor: "Continuous", uuid: id + "source" },
         this.Endpoint1
       );
     }
     if (this.node.type !== "start") {
       this.jsPlumbInstance.addEndpoint(
         id,
-        { anchor: "Continuous", uuid: id + "_top" },
+        { anchor: "Continuous", uuid: id + "dest" },
         this.Endpoint2
       );
     }
@@ -125,24 +131,34 @@ export class NodeComponent implements AfterViewInit {
     this.jsPlumbInstance.remove(node.id);
   }
 
+  getActivityProperties(type: string) {
+    return this.appService.activity_definitions.find(
+      (activity) => activity.type === type
+    ).properties;
+  }
+
+  updateActivityDefinition(
+    type: string,
+    properties: Array<ActivityPropertyDescriptor>
+  ) {
+    this.appService.activity_definitions.find(
+      (activity) => activity.type === type
+    ).properties = properties;
+  }
+
   editNode(node) {
-    this.simpleModalService
-      .addModal(DialogComponent, {
-        title: "Configure",
-        questions: { name: node.name, type: node.type },
-      })
-      .subscribe((result) => {
-        this.node.name = result.name;
-        this.node.type = result.type;
-        if (node.type === "end") {
-          this.jsPlumbInstance.deleteEndpoint(node.id + "right");
-        } else {
-          this.jsPlumbInstance.addEndpoint(
-            this.node.id,
-            { anchor: "Right", uuid: this.node.id + "right" },
-            this.Endpoint1
-          );
-        }
-      });
+    if (node.type !== "start" && node.type !== "end") {
+      this.simpleModalService
+        .addModal(ActivityDialogComponent, {
+          title: "Configure",
+          questions: { name: node.name, type: node.type },
+          properties: this.getActivityProperties(node.type),
+        })
+        .subscribe((result) => {
+          if (result !== undefined) {
+            this.updateActivityDefinition(node.type, result);
+          }
+        });
+    }
   }
 }
