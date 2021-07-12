@@ -12,7 +12,7 @@ export interface Node {
   selector: "app-dynamic-node",
   template: ` <div
     (dblclick)="editNode(node)"
-    class="node"
+    class="mapping-node"
     id="{{ node.id }}"
     style="top: 0; left: 50%;"
   >
@@ -21,7 +21,7 @@ export interface Node {
   </div>`,
   styles: [
     `
-      .node {
+      .mapping-node {
         position: relative;
         width: 100px;
         height: 30px;

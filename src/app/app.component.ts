@@ -52,10 +52,11 @@ export class AppComponent implements OnInit {
   fillFromJson() {
     this.appService.getWorkflow().subscribe((data) => {
       this.appService.activity_definitions = <Array<ActivityDefinition>>(
-        data.activities
+        data.workflow.activities
       );
-      this.nodes = data.nodes;
-      this.connections = data.connections;
+      this.nodes = data.workflow.nodes;
+      this.connections = data.workflow.connections;
+      this.appService.mappings = data.mappings;
     });
   }
 

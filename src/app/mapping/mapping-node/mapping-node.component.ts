@@ -10,6 +10,7 @@ import {
   ViewContainerRef,
 } from "@angular/core";
 import { SimpleModalService } from "ngx-simple-modal";
+import { AppService } from "src/app/app.service";
 import { MappingNodeService } from "../mapping-node.service";
 
 @Component({
@@ -20,13 +21,13 @@ import { MappingNodeService } from "../mapping-node.service";
 export class MappingNodeComponent implements OnChanges, AfterViewInit {
   @Input() nodes;
   @Input() connections;
-  @Output() mappingJson = new EventEmitter<{mapData : string}>();
-  @ViewChild('nodes', { read: ViewContainerRef, static: true })
- 
+  @Output() mappingJson = new EventEmitter<{ mapData: string }>();
+  @ViewChild("nodes", { read: ViewContainerRef, static: true })
   viewContainerRef: ViewContainerRef;
   constructor(
     private nodeService: MappingNodeService,
-    private simpleModalService: SimpleModalService
+    private simpleModalService: SimpleModalService,
+    private appService: AppService
   ) {}
 
   ngAfterViewInit() {
@@ -55,12 +56,18 @@ export class MappingNodeComponent implements OnChanges, AfterViewInit {
         this.nodeService.addDynamicNode(node);
       });
     }
+    setTimeout(() => {
+      this.connections.forEach((connection) => {
+        this.nodeService.addConnection(connection);
+      });
+    });
   }
+
   saveNodeJson() {
     //save element position on Canvas and node conections
 
     const container = this.viewContainerRef.element.nativeElement.ownerDocument;
-    const nodes = Array.from(container.querySelectorAll(".node")).map(
+    const nodes = Array.from(container.querySelectorAll(".mapping-node")).map(
       (node: HTMLDivElement) => {
         return {
           id: node.id,
@@ -74,8 +81,10 @@ export class MappingNodeComponent implements OnChanges, AfterViewInit {
       (conn) => ({ uuids: conn.getUuids() })
     );
 
-    this.mappingJson.emit({mapData:JSON.stringify({ nodes, connections })});
-
-    //console.log(json);
+    this.mappingJson.emit({
+      mapData: JSON.stringify({ mappings: { nodes, connections } }),
+    });
+    this.appService.mappings = connections;
+    console.log(JSON.stringify({ nodes, connections }));
   }
 }

@@ -6,6 +6,7 @@ import { ActivityDefinition } from "./models/activity-definition";
 @Injectable()
 export class AppService {
   activity_definitions: Array<ActivityDefinition>;
+  mappings: any;
 
   constructor(private http: HttpClient) {}
 

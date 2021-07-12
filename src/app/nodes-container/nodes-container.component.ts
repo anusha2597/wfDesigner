@@ -103,8 +103,11 @@ export class NodesContainerComponent
     );
 
     const activities = this.appService.activity_definitions;
-    const json = JSON.stringify({ nodes, connections, activities });
-
+    const mappings = this.appService.mappings;
+    const json = JSON.stringify({
+      workflow: { nodes, connections, activities },
+      mappings,
+    });
     console.log(json);
     const blob = new Blob([json], { type: "application/json" });
     saveAs(blob, "workflow.json");
