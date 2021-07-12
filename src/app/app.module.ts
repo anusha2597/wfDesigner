@@ -12,6 +12,11 @@ import { ActivityDialogComponent } from "./activity-dialog/activity-dialog.compo
 import { AppService } from "./app.service";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MappingHomeComponent } from "./mapping/mapping-home/mapping-home.component";
+import { MappingNodeComponent } from "./mapping/mapping-node/mapping-node.component";
+import { DynamicNodeComponent } from "./mapping/mapping-dynamic-node.component";
+import { MappingNodeService } from "./mapping/mapping-node.service";
+import { Routes } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -19,8 +24,15 @@ import { ReactiveFormsModule } from "@angular/forms";
     NodeComponent,
     NodesContainerComponent,
     ActivityDialogComponent,
+    MappingHomeComponent,
+    MappingNodeComponent,
+    DynamicNodeComponent,
   ],
-  entryComponents: [NodeComponent, ActivityDialogComponent],
+  entryComponents: [
+    NodeComponent,
+    ActivityDialogComponent,
+    DynamicNodeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +41,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
     SimpleModalModule.forRoot({ container: "modal-container" }),
   ],
-  providers: [NodeService, AppService],
+  providers: [NodeService, AppService, MappingNodeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

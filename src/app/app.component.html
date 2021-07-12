@@ -6,16 +6,18 @@
   </div>
   <div class="vl"></div>
   <div class="panel-two"></div>
-</div>
+</div>-->
 
-<router-outlet></router-outlet> -->
+
 
 <!-- <button (click)="nodeContainer.addNode()">Create new node</button> -->
 <!-- <nodes-container #nodeContainer [nodes]="nodes" [connections]="connections"></nodes-container> -->
+
 <div class="container">
 <div style="margin-right: 100px;width: 80%;"><h3 style="text-align: center;">Vyoma Studio</h3></div>
 <div style="padding:10px;"><button class="btn btn-primary align-middle" (click)="nodeContainer.saveWorkflow()">Save Workflow</button></div>
 <div style="padding:10px;"><button class="btn btn-primary align-middle" (click)="nodeContainer.saveNodeJson()">Export JSON</button></div>
+<div style="padding:10px;"><button class="btn btn-primary align-middle" (click)="goToProfileMapping()">Mapping</button></div>
 </div>
 <div class="container">
   <div class="panel-one">
@@ -28,5 +30,7 @@
   <div class="panel-one">
   </div>
 </div>
+<router-outlet></router-outlet>
+
 
 
