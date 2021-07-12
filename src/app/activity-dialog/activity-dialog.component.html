@@ -1,0 +1,36 @@
+<div class="modal-content">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit(e)">
+      <div class="modal-header">
+        <h4>{{ title }}</h4>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let p of properties" >
+        <label>{{p.label}}</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName = {{p.name}}
+          placeholder={{p.hint}}
+          name="name"
+        />
+        </div>
+        <!-- <label>Type</label>
+        <select [(ngModel)]="questions['type']">
+          <option value="middle">Middle</option>
+          <option value="end">End</option>
+        </select> -->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          (click)="close()"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>

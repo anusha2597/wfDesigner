@@ -8,9 +8,10 @@ import {
   ViewContainerRef,
   ViewChild,
 } from "@angular/core";
-import { NodeService } from "./node.service";
+import { NodeService } from "../node.service";
 import { SimpleModalService } from "ngx-simple-modal";
-import { DialogComponent } from "./dialog.component";
+import { saveAs } from "file-saver";
+import { AppService } from "../app.service";
 
 @Component({
   selector: "nodes-container",
@@ -18,7 +19,8 @@ import { DialogComponent } from "./dialog.component";
   styleUrls: ["./nodes-container.component.css"],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NodesContainerComponent implements OnInit, AfterViewInit {
+export class NodesContainerComponent
+  implements OnInit, AfterViewInit, OnChanges {
   @Input() nodes = [];
 
   @Input() connections = [];
@@ -28,16 +30,21 @@ export class NodesContainerComponent implements OnInit, AfterViewInit {
 
   constructor(
     private nodeService: NodeService,
-    private simpleModalService: SimpleModalService
+    private simpleModalService: SimpleModalService,
+    private appService: AppService
   ) {}
 
   ngOnInit() {
+    //this.nodeService.setRootViewContainerRef(this.viewContainerRef);
+  }
+  ngOnChanges() {
     this.nodeService.setRootViewContainerRef(this.viewContainerRef);
-
     this.nodes.forEach((node) => {
       this.nodeService.addDynamicNode(node);
     });
-
+    // this.connections.forEach((connection) => {
+    //   this.nodeService.addConnection(connection);
+    // });
     setTimeout(() => {
       this.connections.forEach((connection) => {
         this.nodeService.addConnection(connection);
@@ -78,12 +85,15 @@ export class NodesContainerComponent implements OnInit, AfterViewInit {
     //save element position on Canvas and node conections
 
     const container = this.viewContainerRef.element.nativeElement.parentNode;
+    console.log(this.nodes);
     const nodes = Array.from(container.querySelectorAll(".node")).map(
       (node: HTMLDivElement) => {
         return {
           id: node.id,
           top: node.offsetTop,
           left: node.offsetLeft,
+          name: this.nodes.find((n) => n.id === node.id).name,
+          type: this.nodes.find((n) => n.id === node.id).type,
         };
       }
     );
@@ -92,8 +102,15 @@ export class NodesContainerComponent implements OnInit, AfterViewInit {
       (conn) => ({ uuids: conn.getUuids() })
     );
 
-    const json = JSON.stringify({ nodes, connections });
+    const activities = this.appService.activity_definitions;
+    const json = JSON.stringify({ nodes, connections, activities });
 
     console.log(json);
+    const blob = new Blob([json], { type: "application/json" });
+    saveAs(blob, "workflow.json");
+  }
+
+  saveWorkflow() {
+    this.saveNodeJson();
   }
 }
