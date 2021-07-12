@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+
 import { SimpleModalService } from 'ngx-simple-modal';
 import { DialogComponent } from 'src/app/dialog.component';
 import { MappingNodeService } from '../mapping-node.service';
@@ -11,7 +12,10 @@ import { MappingNodeService } from '../mapping-node.service';
 export class MappingNodeComponent implements OnChanges, AfterViewInit {
 
   @Input() nodes;
+  @Input() connections;
+  @Output() mappingJson = new EventEmitter<{mapData : string}>();
   @ViewChild('nodes', { read: ViewContainerRef, static: true })
+ 
   viewContainerRef: ViewContainerRef;
   constructor(private nodeService: MappingNodeService, private simpleModalService: SimpleModalService) {
   }
@@ -42,7 +46,28 @@ export class MappingNodeComponent implements OnChanges, AfterViewInit {
         this.nodeService.addDynamicNode(node);
       });
     }
-    
+  }
+  saveNodeJson() {
+    //save element position on Canvas and node conections
+
+    const container = this.viewContainerRef.element.nativeElement.ownerDocument;
+    const nodes = Array.from(container.querySelectorAll(".node")).map(
+      (node: HTMLDivElement) => {
+        return {
+          id: node.id,
+          top: node.offsetTop,
+          left: node.offsetLeft,
+        };
+      }
+    );
+
+    const connections = (this.nodeService.jsPlumbInstance.getAllConnections() as any[]).map(
+      (conn) => ({ uuids: conn.getUuids() })
+    );
+
+    this.mappingJson.emit({mapData:JSON.stringify({ nodes, connections })});
+
+    //console.log(json);
   }
 
 }
