@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
       this.connections = data.connections;
     });
   }
+
   goToProfileMapping() {
     this.router.navigate(["/mapping"]);
   }
