@@ -1,16 +1,16 @@
-import { Component, AfterContentInit, OnInit, ViewChild } from "@angular/core";
-import { NodeService } from "./node.service";
-import * as $ from "jquery";
-import { AppService } from "./app.service";
-import { ActivityDefinition } from "./models/activity-definition";
-import { Router } from "@angular/router";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppService } from '../app.service';
+import { ActivityDefinition } from '../models/activity-definition';
+import { NodeService } from '../node.service';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class AppComponent implements OnInit {
+export class HomeComponent implements OnInit {
+
   @ViewChild("dropArea", { static: true }) dropArea;
   nodes = [];
   // nodes = [
@@ -45,9 +45,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.router.navigate(['/home']);
-    // this.fillFromJson();
-    // this.nodeService.jsPlumbInstance.setContainer(this.dropArea);
+    this.fillFromJson();
+    this.nodeService.jsPlumbInstance.setContainer(this.dropArea);
   }
 
   fillFromJson() {
@@ -64,4 +63,5 @@ export class AppComponent implements OnInit {
   goToProfileMapping() {
     this.router.navigate(["/mapping"]);
   }
+
 }

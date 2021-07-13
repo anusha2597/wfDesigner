@@ -1,4 +1,5 @@
 import { Component, Input, AfterViewInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { jsPlumb } from "jsplumb";
 import { SimpleModalService } from "ngx-simple-modal";
 import { ActivityDialogComponent } from "./activity-dialog/activity-dialog.component";
@@ -94,7 +95,8 @@ export class NodeComponent implements AfterViewInit {
   };
   constructor(
     private simpleModalService: SimpleModalService,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {}
 
   ngAfterViewInit() {
@@ -147,7 +149,8 @@ export class NodeComponent implements AfterViewInit {
   }
 
   editNode(node) {
-    if (node.type !== "start" && node.type !== "end") {
+    if (node.type !== "start" && node.type !== "end" && node.type!=="Map") {
+      
       this.simpleModalService
         .addModal(ActivityDialogComponent, {
           title: "Configure",
@@ -159,6 +162,9 @@ export class NodeComponent implements AfterViewInit {
             this.updateActivityDefinition(node.type, result);
           }
         });
+    }
+    else if(node.type=="Map"){
+        this.router.navigate(['/mapping']);
     }
   }
 }

@@ -13,7 +13,7 @@ div {
     display: flex;
     flex-direction: row;
 }
-.panel-one {
+.mapping-panel-one {
     height: 100vh;
     width: 50%;
     border: 1px solid grey;
@@ -23,7 +23,7 @@ button {
     height: 40px;
     width: 100px;
 }
-.panel-two {
+.mapping-panel-two {
     height: 100vh;
     width: 50%;
     left: 50%;

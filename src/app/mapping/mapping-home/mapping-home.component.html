@@ -7,11 +7,11 @@
   </div>
   <div padding ="100" class="container">
     
-    <div style="background-color:white; color:black; padding:50px;" class="panel-one">
+    <div style="background-color:white; color:black; padding:50px;" class="mapping-panel-one">
         <app-mapping-node padding="400" #nodeContainer (mappingJson) = "getSavedJson($event)" [nodes]="srcNodes" [connections]="connections"></app-mapping-node>
     </div>
     <div class="vl"></div>
-    <div style="background-color:white; color:black; padding:50px;" class="panel-two">
+    <div style="background-color:white; color:black; padding:50px;" class="mapping-panel-two">
         <app-mapping-node padding="400"  [nodes]="dstNodes"></app-mapping-node>
     </div>
   </div>

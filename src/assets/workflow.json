@@ -41,7 +41,7 @@
           "top": 210,
           "left": 162,
           "name": "Map",
-          "type": "ReadLine"
+          "type": "Map"
         },
         {
           "id": "Node6",

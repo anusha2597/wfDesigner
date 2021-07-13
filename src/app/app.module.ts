@@ -17,6 +17,7 @@ import { MappingNodeComponent } from "./mapping/mapping-node/mapping-node.compon
 import { DynamicNodeComponent } from "./mapping/mapping-dynamic-node.component";
 import { MappingNodeService } from "./mapping/mapping-node.service";
 import { Routes } from "@angular/router";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { Routes } from "@angular/router";
     MappingHomeComponent,
     MappingNodeComponent,
     DynamicNodeComponent,
+    HomeComponent,
   ],
   entryComponents: [
     NodeComponent,
