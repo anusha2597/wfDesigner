@@ -42,9 +42,6 @@ export class NodesContainerComponent
     this.nodes.forEach((node) => {
       this.nodeService.addDynamicNode(node);
     });
-    // this.connections.forEach((connection) => {
-    //   this.nodeService.addConnection(connection);
-    // });
     setTimeout(() => {
       this.connections.forEach((connection) => {
         this.nodeService.addConnection(connection);

@@ -13,28 +13,6 @@ import { Router } from "@angular/router";
 export class AppComponent implements OnInit {
   @ViewChild("dropArea", { static: true }) dropArea;
   nodes = [];
-  // nodes = [
-  //   { id: "Node0", name: "Start", top: 38, left: 26, type: "start" },
-  //   { id: "Node1", name: "Database", top: 210, left: 28, type: "Database" },
-  //   {
-  //     id: "Node2",
-  //     name: "Program Command",
-  //     top: 126,
-  //     left: 163,
-  //     type: "ProgramCommand",
-  //   },
-  //   {
-  //     id: "Node3",
-  //     name: "Http Request",
-  //     top: 293,
-  //     left: 163,
-  //     type: "SendHttpRequest",
-  //   },
-  //   { id: "Node4", name: "SFTP", top: 123, left: 29, type: "SFTP" },
-  //   { id: "Node5", name: "Map", top: 210, left: 162, type: "ReadLine" },
-  //   { id: "Node6", name: "Salesforce", top: 293, left: 27, type: "Salesforce" },
-  //   { id: "Node7", name: "End", top: 37, left: 166, type: "end" },
-  // ];
 
   connections = [];
 
